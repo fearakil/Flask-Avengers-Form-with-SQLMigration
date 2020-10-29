@@ -1,10 +1,13 @@
-from avengers_phonebook_app import app, db
-
+from avengers_phonebook_app import app, db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from datetime import datetime
+from flask_login import UserMixin
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100), nullable = False, unique=True)
     phone = db.Column(db.String(10), nullable = False, unique=True)
