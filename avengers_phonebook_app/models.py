@@ -31,19 +31,19 @@ class User(db.Model, UserMixin):
         return self.pw_hash
 
     def __repr__(self):
-        return 'The User %s has been created with %s email' %self.username %self.email
+        return self.name, self.email
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(100))
-    content = db.Column(db.String(300))
+    role = db.Column(db.String(30))
+    phone_number = db.Column(db.String(10))
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
 
-    def __init__(self,title,content,user_id):
-        self.title = title
-        self.content = content
+    def __init__(self,role,phone_number,user_id):
+        self.role = role
+        self.phone_number = phone_number
         self.user_id = user_id
 
     def __repr__(self):
-        return 'The title of the post is %s \n and the content is %s' %self.title %self.content
+        return self.role, self.phone_number

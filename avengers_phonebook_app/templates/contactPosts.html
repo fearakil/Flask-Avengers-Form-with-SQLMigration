@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>
+            Add to Phone Book
+        </h2>
+        <form method="POST">
+            {{ contact_post.hidden_tag() }}
+            <div class="form-group">
+                <fieldset>
+                    {{ contact_post.role.label }}
+                    {{ contact_post.role(class="form-control", placeholder="Add your Role...")  }}
+                </fieldset>
+
+                <fieldset>
+                    {{ contact_post.phone_number.label }}
+                    {{ contact_post.phone_number(class = "form-control", placeholder = "Add your Phone Number..")}}
+                </fieldset>
+                <br>
+                {{ contact_post.submit(class="btn btn-success")}}
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
